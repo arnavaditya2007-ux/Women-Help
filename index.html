@@ -42,7 +42,7 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="%23D81B60"/></svg>'), auto; /* Pink circle custom cursor */
+            cursor: auto;
         }
 
         a { text-decoration: none; color: inherit; }
@@ -106,7 +106,7 @@
             padding: 12px 30px;
             border-radius: 50px;
             font-weight: 600;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23D81B60" d="M13 1.07V9h7c0-4.08-3.05-7.44-7-7.93zM4 15c0 4.42 3.58 8 8 8s8-3.58 8-8v-4H4v4zm7-13.93C7.05 2.56 4 5.92 4 10h7V1.07z"/></svg>'), pointer;
+            cursor: pointer;
             transition: var(--transition);
             border: none;
             font-size: 1rem;
@@ -190,7 +190,7 @@
         .mobile-toggle {
             display: none;
             font-size: 1.5rem;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23D81B60" d="M13 1.07V9h7c0-4.08-3.05-7.44-7-7.93zM4 15c0 4.42 3.58 8 8 8s8-3.58 8-8v-4H4v4zm7-13.93C7.05 2.56 4 5.92 4 10h7V1.07z"/></svg>'), pointer;
+            cursor: pointer;
         }
 
         /* --- Hero Section --- */
@@ -393,7 +393,7 @@
         .dash-tab {
             padding: 12px 15px;
             border-radius: 8px;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23D81B60" d="M13 1.07V9h7c0-4.08-3.05-7.44-7-7.93zM4 15c0 4.42 3.58 8 8 8s8-3.58 8-8v-4H4v4zm7-13.93C7.05 2.56 4 5.92 4 10h7V1.07z"/></svg>'), pointer;
+            cursor: pointer;
             font-size: 0.9rem;
             font-weight: 500;
             color: var(--text-light);
@@ -1180,22 +1180,22 @@
                 <h2>The Innovation Team</h2>
             </div>
             <div class="grid grid-3">
-                <div style="text-align: center;" class="animate-on-scroll clickable-card" data-modal="info" data-title="Dr. Sarah Al-Fayed" data-body="Lead Engineer with a focus on bioelectronics, sensor arrays, and clinical validation." data-cta="Meet The Team" data-link="#team">
+                <div style="text-align: center;" class="animate-on-scroll clickable-card" data-modal="info" data-title="Vikrant Sharma" data-body="Lead Engineer with a focus on bioelectronics, sensor arrays, and clinical validation." data-cta="Meet The Team" data-link="#team">
                     <img src="https://picsum.photos/seed/woman1/150/150" alt="Team Member" class="team-img">
                     <span class="team-role">Lead Engineer</span>
-                    <h3>Dr. Sarah Al-Fayed</h3>
+                    <h3>Vikrant Sharma</h3>
                     <p style="font-size: 0.9rem;">PhD in Bioelectronics. Specialist in non-invasive sensor arrays.</p>
                 </div>
-                <div style="text-align: center;" class="animate-on-scroll clickable-card" data-modal="info" data-title="Priya Sharma" data-body="AI specialist building predictive healthcare models and early warning systems." data-cta="See AI Tech" data-link="#technology">
+                <div style="text-align: center;" class="animate-on-scroll clickable-card" data-modal="info" data-title="Arnav Aditya" data-body="AI specialist building predictive healthcare models and early warning systems." data-cta="See AI Tech" data-link="#technology">
                     <img src="https://picsum.photos/seed/woman2/150/150" alt="Team Member" class="team-img">
                     <span class="team-role">AI Specialist</span>
-                    <h3>Priya Sharma</h3>
+                    <h3>Arnav Aditya</h3>
                     <p style="font-size: 0.9rem;">Data Scientist focused on predictive healthcare models and early warning systems.</p>
                 </div>
-                <div style="text-align: center;" class="animate-on-scroll clickable-card" data-modal="info" data-title="David Chen" data-body="Product designer shaping intuitive, inclusive interfaces for diverse users." data-cta="Explore UX" data-link="#solution">
+                <div style="text-align: center;" class="animate-on-scroll clickable-card" data-modal="info" data-title="Ojaswi Manu" data-body="Product designer shaping intuitive, inclusive interfaces for diverse users." data-cta="Explore UX" data-link="#solution">
                     <img src="https://picsum.photos/seed/man1/150/150" alt="Team Member" class="team-img">
                     <span class="team-role">Product Designer</span>
-                    <h3>David Chen</h3>
+                    <h3>Ojaswi Manu</h3>
                     <p style="font-size: 0.9rem;">UX Researcher ensuring the interface is intuitive for all age demographics.</p>
                 </div>
             </div>
@@ -1901,6 +1901,74 @@
             document.getElementById('healthPredictorForm').style.display = 'block';
             document.getElementById('predictionResults').style.display = 'none';
         }
+
+        // Modal functionality
+        const modalOverlay = document.querySelector('.modal-overlay');
+        const infoModal = document.querySelector('.info-modal');
+        const supportModal = document.querySelector('.support-modal');
+        const modalCloseButtons = document.querySelectorAll('.modal-close');
+
+        document.querySelectorAll('.clickable-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const modalType = this.dataset.modal;
+                const title = this.dataset.title;
+                const body = this.dataset.body;
+                const cta = this.dataset.cta;
+                const link = this.dataset.link;
+
+                if (modalType === 'info') {
+                    infoModal.querySelector('h3').textContent = title;
+                    infoModal.querySelector('p').textContent = body;
+                    const ctaButton = infoModal.querySelector('.btn-primary');
+                    if (cta && link) {
+                        ctaButton.textContent = cta;
+                        ctaButton.href = link;
+                        ctaButton.style.display = 'inline-block';
+                    } else {
+                        ctaButton.style.display = 'none';
+                    }
+                    infoModal.classList.add('active');
+                } else if (modalType === 'support') {
+                    // Populate support modal if needed
+                    supportModal.classList.add('active');
+                }
+                modalOverlay.classList.add('active');
+            });
+        });
+
+        modalCloseButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                infoModal.classList.remove('active');
+                supportModal.classList.remove('active');
+                modalOverlay.classList.remove('active');
+            });
+        });
+
+        modalOverlay.addEventListener('click', function() {
+            infoModal.classList.remove('active');
+            supportModal.classList.remove('active');
+            modalOverlay.classList.remove('active');
+        });
+
+        // Handle CTA button clicks inside modal
+        infoModal.querySelector('.btn-primary').addEventListener('click', function(event) {
+            if (this.href && this.href !== '#') {
+                // Allow default link behavior if href is set
+            } else {
+                event.preventDefault(); // Prevent default if no specific link
+            }
+            infoModal.classList.remove('active');
+            modalOverlay.classList.remove('active');
+        });
+
+        // Close modals with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                infoModal.classList.remove('active');
+                supportModal.classList.remove('active');
+                modalOverlay.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
