@@ -199,12 +199,50 @@
             padding: 100px 0 80px;
             position: relative;
             overflow: hidden;
+            display: flex; /* Added to make hero a flex container */
+            align-items: center; /* Vertically center content */
+            justify-content: center; /* Horizontally center content */
+            min-height: 100vh; /* Ensure hero takes full viewport height */
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Place behind content */
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover; /* Cover the entire container */
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+            z-index: 0; /* Above video, below content */
         }
 
         .hero-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            position: relative; /* Ensure z-index works */
+            z-index: 1; /* Place above video overlay */
         }
 
         .hero-text {
@@ -540,25 +578,25 @@
         }
 
         /* --- HEALTH-INSIGHT Section --- */
-        .health-insight-container {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            margin-top: 40px;
-        }
+         .health-insight-container {
+             display: flex;
+             flex-direction: column;
+             gap: 40px;
+             margin-top: 40px;
+         }
 
-        .health-insight-form, .health-insight-results {
-            background: var(--bg-card);
-            padding: 40px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-soft);
-        }
+         .health-insight-form, .health-insight-results {
+             background: var(--bg-card);
+             padding: 40px;
+             border-radius: var(--border-radius);
+             box-shadow: var(--shadow-soft);
+         }
 
-        .health-insight-form h3, .health-insight-results h3 {
-            color: var(--primary);
-            margin-bottom: 30px;
-            text-align: center;
-        }
+         .health-insight-form h3, .health-insight-results h3 {
+             color: var(--primary);
+             margin-bottom: 30px;
+             text-align: center;
+         }
 
         .form-group {
             margin-bottom: 20px;
@@ -802,6 +840,17 @@
                 border-bottom: 1px solid #eee;
             }
             .dash-tab { white-space: nowrap; }
+
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px; /* Add some space between stacked buttons */
+            }
+
+            .hero-buttons .btn-outline {
+                margin-left: 0 !important; /* Override inline style */
+            }
         }
     </style>
 </head>
@@ -833,16 +882,20 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="video-background">
+            <video autoplay loop muted playsinline>
+                <source src="sample1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text animate__animated animate__fadeInLeft">
-                    <div class="hero-badges animate__animated animate__fadeInUp animate__delay-1s">
-                        <span class="badge">IEEE WIE GOLD IDEA</span>
-                        <span class="badge">IBM Innovation</span>
-                    </div>
+
                     <h1 class="animate__animated animate__fadeInUp animate__delay-1s">Preventive Health Powered by AI & Bioelectronics</h1>
                     <p class="animate__animated animate__fadeInUp animate__delay-2s">Empowering women with early detection of PCOS risk, anemia, and cardiac irregularities through affordable, non-invasive wearable technology.</p>
-                    <div style="margin-top: 30px;" class="animate__animated animate__fadeInUp animate__delay-3s">
+                    <div class="hero-buttons animate__animated animate__fadeInUp animate__delay-3s">
                         <a href="#solution" class="btn btn-primary">Explore Solution</a>
                         <a href="#technology" class="btn btn-outline" style="margin-left: 10px;">View Demo</a>
                     </div>
@@ -988,18 +1041,20 @@
                     <div class="dash-tab" onclick="switchTab('sleep', this)">
                         <span>🌙</span> Sleep Quality
                     </div>
-                    <div class="dash-tab" onclick="switchTab('stress', this)">
-                        <span>🧠</span> Stress Levels
-                    </div>
-                    <div class="dash-tab" onclick="switchTab('oxygen', this)">
-                        <span>🩸</span> Blood Oxygen
-                    </div>
+
+
 
                     <div class="dash-tab" onclick="switchTab('calories', this)">
                         <span>🔥</span> Calories
                     </div>
                     <div class="dash-tab" onclick="switchTab('steps', this)">
                         <span>🚶‍♀️</span> Steps
+                    </div>
+                    <div class="dash-tab" onclick="switchTab('stress', this)">
+                        <span>🧠</span> Stress Levels
+                    </div>
+                    <div class="dash-tab" onclick="switchTab('oxygen', this)">
+                        <span>🩸</span> Blood Oxygen
                     </div>
                 </div>
 
